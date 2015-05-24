@@ -1,0 +1,16 @@
+{
+  "name": "laravel-elixir-uglify",
+  "version": "1.0.0",
+  "description": "uglify wrapper for laravel elixir",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "laravel",
+    "elixir",
+    "laravel-elixir-uglify"
+  ],
+  "author": "Panudet Tammawongsa (mastergrean@gmail.com)",
+  "license": "MIT"
+}
