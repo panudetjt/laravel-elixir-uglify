@@ -17,7 +17,7 @@
   ],
   "author": "Panudet Tammawongsa (mastergrean@gmail.com)",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "gulp-filter": "^2.0.2",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.2.0"
