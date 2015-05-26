@@ -28,7 +28,7 @@ elixir.extend('uglify', function(src, output, options){
 
         return gulp.src(src)
         	.pipe(filter)
-            .pipe(uglify()).on('error', onError)
+            .pipe(uglify(options)).on('error', onError)
             .pipe(rename({
 	            extname: '.min.js'
 	        }))
