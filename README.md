@@ -16,7 +16,7 @@ elixir(function(mix) {
 });
 ```
 
-mix.uglify() by default is going to search every ```.js`` file in ```public/js``` then minify it and rename to ```.min.js``` extension
+By default ```mix.uglify()``` is going to search every ```.js``` file in ```public/js``` then minify it and rename with ```.min.js``` extension
 
 ## Default
 ```javascript
