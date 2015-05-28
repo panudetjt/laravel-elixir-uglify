@@ -17,8 +17,5 @@
     "laravel-elixir-uglify"
   ],
   "author": "Panudet Tammawongsa (mastergrean@gmail.com)",
-  "license": "MIT",
-  "dependencies": {
-    "gulp-uglify": "^1.2.0"
-  }
+  "license": "MIT"
 }

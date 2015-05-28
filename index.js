@@ -1,6 +1,6 @@
 var gulp         = require('gulp');
-var uglify       = require('gulp-uglify');
 var elixir       = require('laravel-elixir');
+var uglify       = require('laravel-elixir/node_modules/gulp-uglify');
 var rename       = require('laravel-elixir/node_modules/gulp-rename');
 var gulpFilter   = require('laravel-elixir/node_modules/gulp-filter');
 var utilities    = require('laravel-elixir/ingredients/commands/Utilities');
