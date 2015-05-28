@@ -1,6 +1,6 @@
 {
   "name": "laravel-elixir-uglify",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "uglify wrapper for laravel elixir",
   "main": "index.js",
   "scripts": {
@@ -13,13 +13,12 @@
   "keywords": [
     "laravel",
     "elixir",
+    "uglify",
     "laravel-elixir-uglify"
   ],
   "author": "Panudet Tammawongsa (mastergrean@gmail.com)",
   "license": "MIT",
   "dependencies": {
-    "gulp-filter": "^2.0.2",
-    "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.2.0"
   }
 }

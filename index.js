@@ -1,8 +1,8 @@
 var gulp         = require('gulp');
-var rename       = require('gulp-rename');
 var uglify       = require('gulp-uglify');
-var gulpFilter   = require('gulp-filter');
 var elixir       = require('laravel-elixir');
+var rename       = require('laravel-elixir/node_modules/gulp-rename');
+var gulpFilter   = require('laravel-elixir/node_modules/gulp-filter');
 var utilities    = require('laravel-elixir/ingredients/commands/Utilities');
 var Notification = require('laravel-elixir/ingredients/commands/Notification');
 
@@ -12,7 +12,7 @@ elixir.extend('uglify', function(src, output, options){
 
 	var baseDir = config.jsOutput;
 
-	var filter = gulpFilter(['**/*', '!**/*.min.js']);
+	var filter  = gulpFilter(['**/*', '!**/*.min.js']);
 
 	src = utilities.buildGulpSrc(src, baseDir, '**/*.js');
 
