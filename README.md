@@ -21,9 +21,13 @@ By default ```mix.uglify()``` is going to search every ```.js``` file in ```publ
 ## Default
 ```javascript
 mix.uglify('**/*.js', 'public/js', {
-	mangle: true
+	mangle: true,
+	suffix: '.min'
 });
 ```
+`suffix`
+type: `string|boolean`
+description: if suffix set to be `false` it will overwrite original file
 
 If you want another options please see [gulp-uglify](https://github.com/terinjokes/gulp-uglify)
 

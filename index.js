@@ -1,5 +1,6 @@
 var gulp         = require('gulp');
 var elixir       = require('laravel-elixir');
+var gulpif       = require('laravel-elixir/node_modules/gulp-if');
 var uglify       = require('laravel-elixir/node_modules/gulp-uglify');
 var rename       = require('laravel-elixir/node_modules/gulp-rename');
 var gulpFilter   = require('laravel-elixir/node_modules/gulp-filter');
@@ -14,6 +15,8 @@ elixir.extend('uglify', function(src, output, options){
 
 	var filter  = gulpFilter(['**/*', '!**/*.min.js']);
 
+	options = options === undefined ? {} : options;
+
 	src = utilities.buildGulpSrc(src, baseDir, '**/*.js');
 
 	gulp.task('uglify', function() {
@@ -26,12 +29,17 @@ elixir.extend('uglify', function(src, output, options){
 
         };
 
+        var extConditon = function(){
+        	if (options.suffix === undefined){
+        		return true;
+        	}
+        	return options.suffix ? true : false;
+        };
+
         return gulp.src(src)
         	.pipe(filter)
             .pipe(uglify(options)).on('error', onError)
-            .pipe(rename({
-	            extname: '.min.js'
-	        }))
+            .pipe(gulpif(extConditon, rename({extname: '.min.js'})))
             .pipe(gulp.dest(output || config.jsOutput))
             .pipe(new Notification().message('Uglified!'));
 
