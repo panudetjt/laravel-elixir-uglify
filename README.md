@@ -25,8 +25,8 @@ mix.uglify('**/*.js', 'public/js', {
 	suffix: '.min'
 });
 ```
-`suffix`
-type: `string|boolean`
+`suffix`  
+type: `string|boolean`  
 description: if suffix set to be `false` it will overwrite original file
 
 If you want another options please see [gulp-uglify](https://github.com/terinjokes/gulp-uglify)
