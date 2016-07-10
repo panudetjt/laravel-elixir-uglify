@@ -1,49 +1,38 @@
-var gulp         = require('gulp');
-var elixir       = require('laravel-elixir');
-var gulpif       = require('laravel-elixir/node_modules/gulp-if');
-var uglify       = require('laravel-elixir/node_modules/gulp-uglify');
-var rename       = require('laravel-elixir/node_modules/gulp-rename');
-var gulpFilter   = require('laravel-elixir/node_modules/gulp-filter');
-var utilities    = require('laravel-elixir/ingredients/commands/Utilities');
-var Notification = require('laravel-elixir/ingredients/commands/Notification');
+const gulp = require('gulp');
+const Elixir = require('laravel-elixir');
 
-elixir.extend('uglify', function(src, output, options){
+const $ = Elixir.Plugins;
+const config = Elixir.config;
 
-	var config  = this;
+/**
+ * Prep the Gulp src and output paths.
+ *
+ * @param  {string|Array} src
+ * @param  {string|null}  output
+ * @return {GulpPaths}
+ */
+function prepGulpPaths(src, output) {
+  return new Elixir.GulpPaths()
+    .src(src, config.get('public.js.folder'))
+    .output(output || config.get('public.js.outputFolder'));
+}
 
-	var baseDir = config.jsOutput;
-
-	var filter  = gulpFilter(['**/*', '!**/*.min.js']);
-
-	options = options === undefined ? {} : options;
-
-	src = utilities.buildGulpSrc(src, baseDir, '**/*.js');
-
-	gulp.task('uglify', function() {
-
-		var onError = function(err) {
-
-			new Notification().error(err, 'Error on line : <%= error.lineNumber %>\n');
-
-            this.emit('end');
-
-        };
-
-        var extConditon = function(){
-        	if (options.suffix === undefined){
-        		return true;
-        	}
-        	return options.suffix ? true : false;
-        };
-
-        return gulp.src(src)
-        	.pipe(filter)
-            .pipe(uglify(options)).on('error', onError)
-            .pipe(gulpif(extConditon, rename({extname: '.min.js'})))
-            .pipe(gulp.dest(output || config.jsOutput))
-            .pipe(new Notification().message('Uglified!'));
-
-	});
-
-	return this.queueTask('uglify');
+Elixir.extend('uglify', (src, output, options = {}) => {
+  const paths = prepGulpPaths(src || ['**/*.js', '!**/*.min.js'], output);
+  new Elixir.Task('uglify', () => {
+    (
+      gulp.src(paths.src.path)
+        .pipe($.if(config.sourcemaps, $.sourcemaps.init()))
+        .pipe($.uglify(options))
+        .on('error', function (err) { // eslint-disable-line func-names
+          // TODO: Have no idea to use "this" in arrow function
+          new Elixir.Notification().error(err, 'Error on line : <%= error.lineNumber %>\n');
+          this.emit('end');
+        })
+        .pipe($.if(options.suffix !== false, $.rename({ extname: options.suffix || '.min.js' })))
+        .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
+        .pipe(gulp.dest(paths.output.baseDir))
+        .pipe(new Elixir.Notification('Uglified!'))
+    );
+  }).watch(paths.src.paths);
 });

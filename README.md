@@ -20,9 +20,9 @@ By default ```mix.uglify()``` is going to search every ```.js``` file in ```publ
 
 ## Default
 ```javascript
-mix.uglify('**/*.js', 'public/js', {
+mix.uglify(['**/*.js', '!**/*.min.js'], 'public/js', {
 	mangle: true,
-	suffix: '.min'
+	suffix: '.min.js'
 });
 ```
 `suffix`  
