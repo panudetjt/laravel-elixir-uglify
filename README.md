@@ -1,3 +1,4 @@
+# Deprecated, Please use [mix.script](https://laravel.com/docs/master/elixir#javascript) official plugin.
 # laravel-elixir-uglify
 uglify wrapper for laravel elixir
 
