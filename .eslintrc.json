@@ -3,8 +3,11 @@
     "plugins": [
         "react"
     ],
+    "env": {
+      "node": true,
+      "mocha": true
+    },
     "rules": {
-      "no-new": 0,
       "no-console": 0
     }
 }
