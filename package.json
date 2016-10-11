@@ -1,6 +1,6 @@
 {
   "name": "laravel-elixir-uglify",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "uglify wrapper for laravel elixir",
   "main": "index.js",
   "scripts": {
